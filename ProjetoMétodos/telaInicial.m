@@ -58,6 +58,26 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+bg_image = imread('lhama.jpg');
+
+% This creates the 'background' axes
+ha = axes('units','normalized', ...
+            'position',[0 0 1 1]);
+        
+% Move the background axes to the bottom
+uistack(ha,'bottom');
+
+% Load in a background image and display it using the correct colors
+% The image used below, is in the Image Processing Toolbox.  If you do not have %access to this toolbox, you can use another image file instead.
+I=imread('gauss.jpg');
+hi = imagesc(I);
+colormap gray
+
+% Turn the handlevisibility off so that we don't inadvertently plot into the axes again
+% Also, make the axes invisible
+set(ha,'handlevisibility','off', ...
+            'visible','off');
+
 % UIWAIT makes telaInicial wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -80,6 +100,7 @@ function togglebutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of togglebutton1
+segundoNivelTela
 
 
 % --- Executes on button press in togglebutton2.
