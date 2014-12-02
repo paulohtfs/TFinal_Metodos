@@ -59,6 +59,19 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 
+global CURRENT_LEVEL
+
+% This creates the 'background' axes
+panhandle = handles.uipanel9;
+panax = axes('Units','normal', 'Position', [0 0 1 1], 'Parent', panhandle);
+
+% Load in a background image and display it using the correct colors
+% The image used below, is in the Image Processing Toolbox.  If you do not have %access to this toolbox, you can use another image file instead.
+current_lhama = get_lhama(CURRENT_LEVEL);
+lhama = imread(current_lhama);
+imshow(lhama);
+
+
 % UIWAIT makes terceiroNivelTela wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
