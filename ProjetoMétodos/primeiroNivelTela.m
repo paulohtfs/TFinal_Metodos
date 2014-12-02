@@ -22,7 +22,7 @@ function varargout = primeiroNivelTela(varargin)
 
 % Edit the above text to modify the response to help primeiroNivelTela
 
-% Last Modified by GUIDE v2.5 02-Dec-2014 19:57:41
+% Last Modified by GUIDE v2.5 02-Dec-2014 20:38:04
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -52,6 +52,11 @@ function primeiroNivelTela_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   unrecognized PropertyName/PropertyValue pairs from the
 %            command line (see VARARGIN)
+global matriz;
+matriz = [1 1 ; 2 2]
+
+
+set(handles.show_matriz,'String',num2str(matriz));
 
 % Choose default command line output for primeiroNivelTela
 handles.output = hObject;
@@ -184,3 +189,12 @@ function edit13_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes during object creation, after setting all properties.
+function show_matriz_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to show_matriz (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+%matriz2 = [1 1 ; 2 2]
+%value = num2str(matriz2)
