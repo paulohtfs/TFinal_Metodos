@@ -58,7 +58,8 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-bg_image = imread('lhama.jpg');
+global CURRENT_LEVEL
+CURRENT_LEVEL = 1
 
 % This creates the 'background' axes
 ha = axes('units','normalized', ...
@@ -69,8 +70,8 @@ uistack(ha,'bottom');
 
 % Load in a background image and display it using the correct colors
 % The image used below, is in the Image Processing Toolbox.  If you do not have %access to this toolbox, you can use another image file instead.
-I=imread('gauss.jpg');
-hi = imagesc(I);
+bg_image = imread('gauss.jpg');
+hi = imagesc(bg_image);
 colormap gray
 
 % Turn the handlevisibility off so that we don't inadvertently plot into the axes again
@@ -100,7 +101,7 @@ function togglebutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of togglebutton1
-segundoNivelTela
+primeiroNivelTela
 
 
 % --- Executes on button press in togglebutton2.

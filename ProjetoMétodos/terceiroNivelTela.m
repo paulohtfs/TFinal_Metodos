@@ -58,6 +58,7 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+
 % UIWAIT makes terceiroNivelTela wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
