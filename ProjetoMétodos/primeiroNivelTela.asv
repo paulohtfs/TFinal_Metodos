@@ -77,6 +77,18 @@ current_lhama = get_lhama(CURRENT_LEVEL);
 lhama = imread(current_lhama);
 imshow(lhama);
 
+% Timer
+set(handles.timer,'Str',
+timer = 120;
+t = timer('TimerFcn', 'stat=false; disp(''Timer!'')',... 
+                 'StartDelay',10);
+start(t)
+stat=true;
+while(stat==true)
+  pause(1)
+end
+
+
 % UIWAIT makes primeiroNivelTela wait for user response (see UIRESUME)
 % uiwait(handles.primeiro_nivel);
 

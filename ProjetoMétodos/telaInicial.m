@@ -63,7 +63,7 @@ global CURRENT_LHAMA;
 global NUMBER_OF_SHOTS;
 
 CURRENT_LEVEL = 1;
-CURRENT_LHAMA = 0;
+CURRENT_LHAMA = 2;
 NUMBER_OF_SHOTS = 3;
 
 % This creates the 'background' axes
@@ -106,7 +106,7 @@ function togglebutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of togglebutton1
-mapaNivelFacil
+
 close(handles.tela_inicial);
 
 
