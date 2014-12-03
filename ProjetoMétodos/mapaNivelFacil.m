@@ -58,9 +58,11 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+global CURRENT_LEVEL
 global CURRENT_LHAMA;
 global NUMBER_OF_SHOTS;
 
+set(handles.level,'String',num2str(CURRENT_LEVEL));
 set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
 
 % This creates the 'background' axes
@@ -93,12 +95,17 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global MATRIZ;
+
 global CURRENT_LEVEL
-MATRIZ = [1 1 ; 2 2];
-CURRENT_LEVEL = 1;
-primeiroNivelTela
-close(handles.mapa_facil);
+global MATRIZ;
+global B_MATRIZ
+
+if CURRENT_LEVEL == 1
+    MATRIZ = [2 3 ; 5 -6];
+    B_MATRIZ = [-5; 28];
+    primeiroNivelTela
+    close(handles.mapa_facil);
+end
 
 
 % --- Executes on button press in pushbutton2.
@@ -108,11 +115,12 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
-MATRIZ = [2 2 ; 3 3];
-CURRENT_LEVEL = 2;
-primeiroNivelTela
-close(handles.mapa_facil);
 
+if CURRENT_LEVEL == 2    
+    MATRIZ = [2 2 ; 3 3];
+    primeiroNivelTela
+    close(handles.mapa_facil);
+end
 
 % --- Executes on button press in pushbutton3.
 function pushbutton3_Callback(hObject, eventdata, handles)
@@ -121,11 +129,12 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
-MATRIZ = [3 3 ; 4 4];
-CURRENT_LEVEL = 3;
-primeiroNivelTela
-close(handles.mapa_facil);
 
+if CURRENT_LEVEL == 3
+    MATRIZ = [3 3 ; 4 4];
+    primeiroNivelTela
+    close(handles.mapa_facil);
+end
 
 % --------------------------------------------------------------------
 function uipanel1_ButtonDownFcn(hObject, eventdata, handles)

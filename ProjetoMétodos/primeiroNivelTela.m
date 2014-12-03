@@ -129,21 +129,29 @@ function submit_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global Agauss
 global NUMBER_OF_SHOTS;
-values = [0 0; 0 0]
-values(1,1) = str2num(get(handles.edit11,'string'));
+global CURRENT_LEVEL
+
+values = [0 0; 0 0];
+values(1,1) = str2num(get(handles.edit1,'string'));
 values(1,2) = str2num(get(handles.edit12,'string'));
-values(2,1) = str2num(get(handles.edit21,'string'));
-values(2,2) = str2num(get(handles.edit22,'string'));
+values(2,1) = str2num(get(handles.edit10,'string'));
+values(2,2) = str2num(get(handles.edit13,'string'));
+
 if( isequal(Agauss, values))
      waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
-     close(primeiroNivelTela);
-      segundoNivelTela;
-     
+     close(handles.primeiro_nivel);
+     CURRENT_LEVEL = CURRENT_LEVEL + 1;
+     if CURRENT_LEVEL > 3
+         mapaNivelMedio;
+     else
+         if CURRENT_LEVEL <= 3
+             mapaNivelFacil
+         end
+     end
 else
     %Reduces attempts
     msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
     NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
-    NUMBER_OF_SHOTS
 end
 
 

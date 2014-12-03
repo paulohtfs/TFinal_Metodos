@@ -95,11 +95,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
-CURRENT_LEVEL = 4;
-MATRIZ = [1 1 1; 2 2 2 ; 3 3 3];
-segundoNivelTela
-close(handles.mapa_medio);
 
+if CURRENT_LEVEL == 4 
+    MATRIZ = [1 1 1; 2 2 2 ; 3 3 3];
+    segundoNivelTela
+    close(handles.mapa_medio);
+end
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
@@ -108,11 +109,12 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
-CURRENT_LEVEL = 5;
-MATRIZ = [3 3 3; 4 4 4; 5 5 5];
-segundoNivelTela
-close(handles.mapa_medio);
 
+if CURRENT_LEVEL == 5
+    MATRIZ = [3 3 3; 4 4 4; 5 5 5];
+    segundoNivelTela
+    close(handles.mapa_medio);
+end
 
 % --- Executes on button press in pushbutton3.
 function pushbutton3_Callback(hObject, eventdata, handles)
@@ -121,11 +123,12 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
-CURRENT_LEVEL = 6;
-MATRIZ = [4 4 4; 5 5 5; 6 6 6];
-segundoNivelTela
-close(handles.mapa_medio);
 
+if CURRENT_LEVEL == 6
+    MATRIZ = [4 4 4; 5 5 5; 6 6 6];
+    segundoNivelTela
+    close(handles.mapa_medio);
+end
 
 % --------------------------------------------------------------------
 function uipanel1_ButtonDownFcn(hObject, eventdata, handles)
