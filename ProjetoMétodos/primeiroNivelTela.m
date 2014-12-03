@@ -69,6 +69,7 @@ guidata(hObject, handles);
 
 global CURRENT_LEVEL;
 global NUMBER_OF_SHOTS;
+NUMBER_OF_SHOTS = 3;
 
 
 set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
@@ -128,21 +129,26 @@ function submit_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global Agauss
+global NUMBER_OF_SHOTS;
 values = [0 0; 0 0]
 values(1,1) = str2num(get(handles.edit11,'string'));
 values(1,2) = str2num(get(handles.edit12,'string'));
 values(2,1) = str2num(get(handles.edit21,'string'));
 values(2,2) = str2num(get(handles.edit22,'string'));
 if( isequal(Agauss, values))
-     msgbox('Parabéns!! Você acertou!!','GaussGame');
+     waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
+      segundoNivelTela;
      
 else
+    %Reduces attempts
     msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
-    
+    NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
+    NUMBER_OF_SHOTS
 end
 
-global NUMBER_OF_SHOTS;
+
 if NUMBER_OF_SHOTS == 0
+    
     % end game logic
 else
     % subtract or add shots
