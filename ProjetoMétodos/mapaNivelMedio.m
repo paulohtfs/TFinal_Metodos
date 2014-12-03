@@ -94,6 +94,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
+global CURRENT_LEVEL;
+CURRENT_LEVEL = 4;
 MATRIZ = [1 1 1; 2 2 2 ; 3 3 3];
 segundoNivelTela
 close(handles.mapa_medio);
@@ -105,7 +107,9 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
-MATRIZ = [3 3 3, 4 4 4, 5 5 5];
+global CURRENT_LEVEL;
+CURRENT_LEVEL = 5;
+MATRIZ = [3 3 3; 4 4 4; 5 5 5];
 segundoNivelTela
 close(handles.mapa_medio);
 
@@ -116,7 +120,9 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
-MATRIZ = [4 4 4, 5 5 5, 6 6 6];
+global CURRENT_LEVEL;
+CURRENT_LEVEL = 6;
+MATRIZ = [4 4 4; 5 5 5; 6 6 6];
 segundoNivelTela
 close(handles.mapa_medio);
 

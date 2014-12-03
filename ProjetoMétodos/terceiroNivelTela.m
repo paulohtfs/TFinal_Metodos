@@ -60,7 +60,12 @@ guidata(hObject, handles);
 
 
 global CURRENT_LEVEL
+global NUMBER_OF_SHOTS;
+global MATRIZ;
 
+% Set informations
+set(handles.show_matriz,'String',num2str(MATRIZ));
+set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
 % This creates the 'background' axes
 panhandle = handles.uipanel9;
 panax = axes('Units','normal', 'Position', [0 0 1 1], 'Parent', panhandle);

@@ -1,35 +1,35 @@
-function varargout = mapaNivelFacil(varargin)
-% MAPANIVELFACIL MATLAB code for mapaNivelFacil.fig
-%      MAPANIVELFACIL, by itself, creates a new MAPANIVELFACIL or raises the existing
+function varargout = mapaNivelDificil(varargin)
+% MAPANIVELDIFICIL MATLAB code for mapaNivelDificil.fig
+%      MAPANIVELDIFICIL, by itself, creates a new MAPANIVELDIFICIL or raises the existing
 %      singleton*.
 %
-%      H = MAPANIVELFACIL returns the handle to a new MAPANIVELFACIL or the handle to
+%      H = MAPANIVELDIFICIL returns the handle to a new MAPANIVELDIFICIL or the handle to
 %      the existing singleton*.
 %
-%      MAPANIVELFACIL('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in MAPANIVELFACIL.M with the given input arguments.
+%      MAPANIVELDIFICIL('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in MAPANIVELDIFICIL.M with the given input arguments.
 %
-%      MAPANIVELFACIL('Property','Value',...) creates a new MAPANIVELFACIL or raises the
+%      MAPANIVELDIFICIL('Property','Value',...) creates a new MAPANIVELDIFICIL or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before mapaNivelFacil_OpeningFcn gets called.  An
+%      applied to the GUI before mapaNivelDificil_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to mapaNivelFacil_OpeningFcn via varargin.
+%      stop.  All inputs are passed to mapaNivelDificil_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help mapaNivelFacil
+% Edit the above text to modify the response to help mapaNivelDificil
 
-% Last Modified by GUIDE v2.5 02-Dec-2014 23:15:27
+% Last Modified by GUIDE v2.5 02-Dec-2014 23:54:40
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @mapaNivelFacil_OpeningFcn, ...
-                   'gui_OutputFcn',  @mapaNivelFacil_OutputFcn, ...
+                   'gui_OpeningFcn', @mapaNivelDificil_OpeningFcn, ...
+                   'gui_OutputFcn',  @mapaNivelDificil_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,15 +44,15 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before mapaNivelFacil is made visible.
-function mapaNivelFacil_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before mapaNivelDificil is made visible.
+function mapaNivelDificil_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to mapaNivelFacil (see VARARGIN)
+% varargin   command line arguments to mapaNivelDificil (see VARARGIN)
 
-% Choose default command line output for mapaNivelFacil
+% Choose default command line output for mapaNivelDificil
 handles.output = hObject;
 
 % Update handles structure
@@ -73,12 +73,12 @@ current_lhama = get_lhama(CURRENT_LHAMA);
 lhama = imread(current_lhama);
 imshow(lhama);
 
-% UIWAIT makes mapaNivelFacil wait for user response (see UIRESUME)
-% uiwait(handles.mapa_facil);
+% UIWAIT makes mapaNivelDificil wait for user response (see UIRESUME)
+% uiwait(handles.mapa_dificil);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = mapaNivelFacil_OutputFcn(hObject, eventdata, handles) 
+function varargout = mapaNivelDificil_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -94,11 +94,11 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
-global CURRENT_LEVEL
-MATRIZ = [1 1 ; 2 2];
-CURRENT_LEVEL = 1;
-primeiroNivelTela
-close(handles.mapa_facil);
+global CURRENT_LEVEL;
+CURRENT_LEVEL = 7;
+MATRIZ = [1 1 1 1; 2 2 2 2; 3 3 3 3; 4 4 4 4];
+terceiroNivelTela
+close(handles.mapa_dificil);
 
 
 % --- Executes on button press in pushbutton2.
@@ -108,10 +108,10 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
-MATRIZ = [2 2 ; 3 3];
-CURRENT_LEVEL = 2;
-primeiroNivelTela
-close(handles.mapa_facil);
+CURRENT_LEVEL = 8;
+MATRIZ = [3 3 3; 4 4 4; 5 5 5];
+terceiroNivelTela
+close(handles.mapa_dificil);
 
 
 % --- Executes on button press in pushbutton3.
@@ -121,10 +121,10 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
-MATRIZ = [3 3 ; 4 4];
-CURRENT_LEVEL = 3;
-primeiroNivelTela
-close(handles.mapa_facil);
+CURRENT_LEVEL = 9;
+MATRIZ = [4 4 4; 5 5 5; 6 6 6];
+terceiroNivelTela
+close(handles.mapa_dificil);
 
 
 % --------------------------------------------------------------------
