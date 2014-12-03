@@ -72,7 +72,7 @@ STAGE = 1;
 
 % Set informations
 set(handles.show_matriz,'String',num2str(MATRIZ));
-set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
+set(handles.tentativa,'String',num2str(NUMBER_OF_SHOTS));
 
 % This creates the 'background' axes
 panhandle = handles.uipanel9;

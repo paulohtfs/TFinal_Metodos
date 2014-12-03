@@ -130,7 +130,7 @@ function submit_Callback(hObject, eventdata, handles)
 global Agauss
 global NUMBER_OF_SHOTS;
 global CURRENT_LEVEL
-
+global CURRENT_LHAMA
 values = [0 0; 0 0];
 values(1,1) = str2num(get(handles.edit11,'string'));
 values(1,2) = str2num(get(handles.edit12,'string'));
@@ -141,6 +141,7 @@ if( isequal(Agauss, values))
      waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
      %close(primeiro_nivel_tela);
      CURRENT_LEVEL = CURRENT_LEVEL + 1;
+     CURRENT_LHAMA =+1;
      if CURRENT_LEVEL > 3
          mapaNivelMedio;
      else
