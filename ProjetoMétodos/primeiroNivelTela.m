@@ -132,14 +132,14 @@ global NUMBER_OF_SHOTS;
 global CURRENT_LEVEL
 
 values = [0 0; 0 0];
-values(1,1) = str2num(get(handles.edit1,'string'));
+values(1,1) = str2num(get(handles.edit11,'string'));
 values(1,2) = str2num(get(handles.edit12,'string'));
-values(2,1) = str2num(get(handles.edit10,'string'));
-values(2,2) = str2num(get(handles.edit13,'string'));
+values(2,1) = str2num(get(handles.edit21,'string'));
+values(2,2) = str2num(get(handles.edit22,'string'));
 
 if( isequal(Agauss, values))
      waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
-     close(handles.primeiro_nivel);
+     %close(primeiro_nivel_tela);
      CURRENT_LEVEL = CURRENT_LEVEL + 1;
      if CURRENT_LEVEL > 3
          mapaNivelMedio;
