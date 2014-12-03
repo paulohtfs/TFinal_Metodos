@@ -69,6 +69,7 @@ guidata(hObject, handles);
 
 global CURRENT_LEVEL;
 global NUMBER_OF_SHOTS;
+
 NUMBER_OF_SHOTS = 3;
 
 
@@ -137,6 +138,7 @@ values(2,1) = str2num(get(handles.edit21,'string'));
 values(2,2) = str2num(get(handles.edit22,'string'));
 if( isequal(Agauss, values))
      waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
+     close(primeiroNivelTela);
       segundoNivelTela;
      
 else
