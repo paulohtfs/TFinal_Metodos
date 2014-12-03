@@ -53,6 +53,14 @@ function primeiroNivelTela_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   unrecognized PropertyName/PropertyValue pairs from the
 %            command line (see VARARGIN)
 
+global A b Agauss bgauss
+A = [2 3 ; 5 -6]
+b = [-5; 28]
+[Agauss,bgauss] = eliminacao_gauss(A,b)
+
+set(handles.show_matriz,'String',num2str(A));
+
+
 % Choose default command line output for primeiroNivelTela
 handles.output = hObject;
 
@@ -63,7 +71,6 @@ global CURRENT_LEVEL;
 global NUMBER_OF_SHOTS;
 global MATRIZ;
 
-% Set informations
 set(handles.show_matriz,'String',num2str(MATRIZ));
 set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
 
@@ -93,18 +100,18 @@ varargout{1} = handles.output;
 
 
 
-function edit1_Callback(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+function edit11_Callback(hObject, eventdata, handles)
+% hObject    handle to edit11 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit1 as text
-%        str2double(get(hObject,'String')) returns contents of edit1 as a double
+% Hints: get(hObject,'String') returns contents of edit11 as text
+%        str2double(get(hObject,'String')) returns contents of edit11 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+function edit11_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit11 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -120,8 +127,28 @@ function submit_Callback(hObject, eventdata, handles)
 % hObject    handle to submit (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global Agauss
 global NUMBER_OF_SHOTS;
+values = [0 0; 0 0]
+values(1,1) = str2num(get(handles.edit11,'string'));
+values(1,2) = str2num(get(handles.edit12,'string'));
+values(2,1) = str2num(get(handles.edit21,'string'));
+values(2,2) = str2num(get(handles.edit22,'string'));
+if( isequal(Agauss, values))
+     waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
+     close(primeiroNivelTela);
+      segundoNivelTela;
+     
+else
+    %Reduces attempts
+    msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
+    NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
+    NUMBER_OF_SHOTS
+end
+
+
 if NUMBER_OF_SHOTS == 0
+    
     % end game logic
 else
     % subtract or add shots
@@ -130,19 +157,18 @@ end
 
 
 
-
-function edit10_Callback(hObject, eventdata, handles)
-% hObject    handle to edit10 (see GCBO)
+function edit21_Callback(hObject, eventdata, handles)
+% hObject    handle to edit21 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit10 as text
-%        str2double(get(hObject,'String')) returns contents of edit10 as a double
+% Hints: get(hObject,'String') returns contents of edit21 as text
+%        str2double(get(hObject,'String')) returns contents of edit21 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit10_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit10 (see GCBO)
+function edit21_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit21 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -177,18 +203,18 @@ end
 
 
 
-function edit13_Callback(hObject, eventdata, handles)
-% hObject    handle to edit13 (see GCBO)
+function edit22_Callback(hObject, eventdata, handles)
+% hObject    handle to edit22 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit13 as text
-%        str2double(get(hObject,'String')) returns contents of edit13 as a double
+% Hints: get(hObject,'String') returns contents of edit22 as text
+%        str2double(get(hObject,'String')) returns contents of edit22 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit13_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit13 (see GCBO)
+function edit22_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit22 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
