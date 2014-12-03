@@ -52,6 +52,7 @@ function primeiroNivelTela_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   unrecognized PropertyName/PropertyValue pairs from the
 %            command line (see VARARGIN)
+
 global A b Agauss bgauss
 A = [2 3 ; 5 -6]
 b = [-5; 28]
@@ -59,13 +60,18 @@ b = [-5; 28]
 
 set(handles.show_matriz,'String',num2str(A));
 
+
 % Choose default command line output for primeiroNivelTela
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-global CURRENT_LEVEL
+global CURRENT_LEVEL;
+global NUMBER_OF_SHOTS;
+
+
+set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
 
 % This creates the 'background' axes
 panhandle = handles.uipanel9;
@@ -134,7 +140,16 @@ else
     msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
     
 end
-values
+
+global NUMBER_OF_SHOTS;
+if NUMBER_OF_SHOTS == 0
+    % end game logic
+else
+    % subtract or add shots
+    set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
+end
+
+
 
 function edit21_Callback(hObject, eventdata, handles)
 % hObject    handle to edit21 (see GCBO)
