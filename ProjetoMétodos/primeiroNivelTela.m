@@ -53,14 +53,6 @@ function primeiroNivelTela_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   unrecognized PropertyName/PropertyValue pairs from the
 %            command line (see VARARGIN)
 
-global A b Agauss bgauss
-A = [2 3 ; 5 -6]
-b = [-5; 28]
-[Agauss,bgauss] = eliminacao_gauss(A,b)
-
-set(handles.show_matriz,'String',num2str(A));
-
-
 % Choose default command line output for primeiroNivelTela
 handles.output = hObject;
 
@@ -70,8 +62,12 @@ guidata(hObject, handles);
 global CURRENT_LEVEL;
 global NUMBER_OF_SHOTS;
 global MATRIZ;
+global B_MATRIZ Agauss bgauss;
 
-set(handles.show_matriz,'String',num2str(MATRIZ));
+[Agauss,bgauss] = eliminacao_gauss(MATRIZ,B_MATRIZ);
+
+show_mat = strcat(num2str(MATRIZ),' = ', num2str(B_MATRIZ));
+set(handles.show_matriz,'String',show_mat);
 set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
 
 % This creates the 'background' axes
@@ -131,6 +127,7 @@ global Agauss
 global NUMBER_OF_SHOTS;
 global CURRENT_LEVEL
 global CURRENT_LHAMA
+
 values = [0 0; 0 0];
 values(1,1) = str2num(get(handles.edit11,'string'));
 values(1,2) = str2num(get(handles.edit12,'string'));
@@ -141,7 +138,8 @@ if( isequal(Agauss, values))
      waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
      %close(primeiro_nivel_tela);
      CURRENT_LEVEL = CURRENT_LEVEL + 1;
-     CURRENT_LHAMA =+1;
+     CURRENT_LHAMA = CURRENT_LHAMA + 1;
+     NUMBER_OF_SHOTS = NUMBER_OF_SHOTS + 1;
      if CURRENT_LEVEL > 3
          mapaNivelMedio;
      else
@@ -153,7 +151,7 @@ else
     %Reduces attempts
     if NUMBER_OF_SHOTS == 0 
         close(handles.primeiro_nivel);
-        telaLose;
+        telaLose
     else
         msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
         NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;

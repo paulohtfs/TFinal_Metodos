@@ -99,10 +99,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 global CURRENT_LEVEL
 global MATRIZ;
 global B_MATRIZ
+global Agauss bgauss;
 
 if CURRENT_LEVEL == 1
     MATRIZ = [2 3 ; 5 -6];
     B_MATRIZ = [-5; 28];
+    [Agauss,bgauss] = eliminacao_gauss(MATRIZ,B_MATRIZ);
     primeiroNivelTela
     close(handles.mapa_facil);
 end
@@ -115,9 +117,13 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
+global B_MATRIZ;
+global Agauss bgauss;
 
-if CURRENT_LEVEL == 2    
+if CURRENT_LEVEL == 2
     MATRIZ = [2 2 ; 3 3];
+    B_MATRIZ = [2; 1];
+    [Agauss,bgauss] = eliminacao_gauss(MATRIZ,B_MATRIZ);
     primeiroNivelTela
     close(handles.mapa_facil);
 end
@@ -129,9 +135,13 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
+global B_MATRIZ;
+global Agauss bgauss;
 
 if CURRENT_LEVEL == 3
     MATRIZ = [3 3 ; 4 4];
+    B_MATRIZ = [6;8 ];
+    [Agauss,bgauss] = eliminacao_gauss(MATRIZ,B_MATRIZ);
     primeiroNivelTela
     close(handles.mapa_facil);
 end

@@ -22,7 +22,7 @@ function varargout = segundoNivelTela(varargin)
 
 % Edit the above text to modify the response to help segundoNivelTela
 
-% Last Modified by GUIDE v2.5 02-Dec-2014 23:30:32
+% Last Modified by GUIDE v2.5 03-Dec-2014 16:47:34
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -51,13 +51,8 @@ function segundoNivelTela_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to segundoNivelTela (see VARARGIN)
-global A b Agauss bgauss Agauss_second  bgauss_second
-A = [2 1 -3 ; -1 3 2;3 1 -3]
-b = [-1; 12; 0]
-[Agauss,bgauss] = eliminacao_gauss(A,b)
-[Agauss_second,bgauss_second] = eliminacao_gauss_second(A,b)
 
-set(handles.show_matriz,'String',num2str(A));
+
 % Choose default command line output for segundoNivelTela
 handles.output = hObject;
 
@@ -68,10 +63,19 @@ global CURRENT_LEVEL
 global NUMBER_OF_SHOTS;
 global STAGE;
 global MATRIZ;
+global B_MATRIZ;
 STAGE = 1;
 
+global  Agauss bgauss Agauss_second  bgauss_second 
+[Agauss,bgauss] = eliminacao_gauss(MATRIZ,B_MATRIZ)
+[Agauss_second,bgauss_second] = eliminacao_gauss_second(MATRIZ,B_MATRIZ)
+
+
 % Set informations
-set(handles.show_matriz,'String',num2str(MATRIZ));
+if(STAGE == 1)
+    set(handles.show_matriz,'String',num2str(MATRIZ));
+
+end    
 set(handles.tentativa,'String',num2str(NUMBER_OF_SHOTS));
 
 % This creates the 'background' axes
@@ -312,39 +316,68 @@ function submit_screen2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global Agauss
+global STAGE;
 global NUMBER_OF_SHOTS;
-values = [0 0 0; 0 0 0;0 0 0]
+global Agauss_second  bgauss_second; 
+values = [0 0 0; 0 0 0;0 0 0];
 values(1,1) = str2num(get(handles.edit11_screen2,'string'));
 values(1,2) = str2num(get(handles.edit12_screen2,'string'));
 values(1,3) = str2num(get(handles.edit13_screen2,'string'));
-values(2,1) = str2num(get(handles.edit21_sreen2,'string'));
+values(2,1) = str2num(get(handles.edit21_screen2,'string'));
 values(2,2) = str2num(get(handles.edit22_screen2,'string'));
 values(2,3) = str2num(get(handles.edit23_screen2,'string'));
 values(3,1) = str2num(get(handles.edit31_screen2,'string'));
 values(3,2) = str2num(get(handles.edit32_screen2,'string'));
 values(3,3) = str2num(get(handles.edit33_screen2,'string'));
-
+Agauss_second
+Agauss
+STAGE
 values
-
-if( isequal(Agauss, values))
-     waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
-      segundoNivelTela;
-     
-else
-    %Reduces attempts
-    msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
-    NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
-    NUMBER_OF_SHOTS
-end
-
-
-if NUMBER_OF_SHOTS == 0
+if ( STAGE == 1)
+    if(isequal(Agauss_second, values))
+       % waitfor(msgBox('Acertou a primeira etapa','GaussGame'));
+        set(handles.show_matriz,'String',num2str(Agauss_second));
+        STAGE = STAGE +1;
+        
+        
+    else
+          if NUMBER_OF_SHOTS == 0 
+             close(handles.segundo_nivel);
+             telaLose
+         else
+            msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
+            NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
+          end      
     
-    % end game logic
-else
-    % subtract or add shots
-    set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
+    end
+
+elseif( STAGE == 2)        
+    if( isequal(num2str(Agauss),num2str( values)))
+         waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
+         set(handles.show_matriz,'String',num2str(Agauss_second));
+        
+         if CURRENT_LEVEL > 6
+         mapaNivelDificil;
+         else
+             if CURRENT_LEVEL <= 6
+                 mapaNivelMedio
+             end
+         end
+     
+     
+    else     
+         if NUMBER_OF_SHOTS == 0 
+             close(handles.segundo_nivel);
+             telaLose
+         else
+            msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
+            NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
+         end
+        
+    end
 end
+set(handles.tentativa,'String',num2str(NUMBER_OF_SHOTS));
+
 
 
 function edit21_screen2_Callback(hObject, eventdata, handles)
@@ -533,13 +566,13 @@ end
 
 
 
-function edit31_sreen2_Callback(hObject, eventdata, handles)
-% hObject    handle to edit31_sreen2 (see GCBO)
+function edit31_screen2_Callback(hObject, eventdata, handles)
+% hObject    handle to edit31_screen2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit31_sreen2 as text
-%        str2double(get(hObject,'String')) returns contents of edit31_sreen2 as a double
+% Hints: get(hObject,'String') returns contents of edit31_screen2 as text
+%        str2double(get(hObject,'String')) returns contents of edit31_screen2 as a double
 
 
 
