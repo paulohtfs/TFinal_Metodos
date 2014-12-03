@@ -22,7 +22,7 @@ function varargout = terceiroNivelTela(varargin)
 
 % Edit the above text to modify the response to help terceiroNivelTela
 
-% Last Modified by GUIDE v2.5 01-Dec-2014 17:48:39
+% Last Modified by GUIDE v2.5 02-Dec-2014 22:57:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,7 +73,7 @@ imshow(lhama);
 
 
 % UIWAIT makes terceiroNivelTela wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.terceiro_nivel);
 
 
 % --- Outputs from this function are returned to the command line.

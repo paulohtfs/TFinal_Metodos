@@ -1,6 +1,9 @@
 function lhama = get_lhama(current_level)
 
 switch current_level
+    case 0
+        lhama = 'no_lhama.jpg';
+    
     case 1
         lhama = 'lhama.jpg';
         

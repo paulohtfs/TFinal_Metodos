@@ -22,7 +22,7 @@ function varargout = telaInicial(varargin)
 
 % Edit the above text to modify the response to help telaInicial
 
-% Last Modified by GUIDE v2.5 01-Dec-2014 17:53:13
+% Last Modified by GUIDE v2.5 02-Dec-2014 22:54:53
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,9 +59,11 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 global CURRENT_LEVEL;
+global CURRENT_LHAMA;
 global NUMBER_OF_SHOTS;
 
 CURRENT_LEVEL = 1;
+CURRENT_LHAMA = 0;
 NUMBER_OF_SHOTS = 3;
 
 % This creates the 'background' axes
@@ -83,7 +85,7 @@ set(ha,'handlevisibility','off', ...
             'visible','off');
 
 % UIWAIT makes telaInicial wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.tela_inicial);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -104,7 +106,8 @@ function togglebutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of togglebutton1
-primeiroNivelTela
+mapaNivelFacil
+close(handles.tela_inicial);
 
 
 % --- Executes on button press in togglebutton2.

@@ -22,7 +22,7 @@ function varargout = primeiroNivelTela(varargin)
 
 % Edit the above text to modify the response to help primeiroNivelTela
 
-% Last Modified by GUIDE v2.5 02-Dec-2014 20:38:04
+% Last Modified by GUIDE v2.5 02-Dec-2014 22:56:04
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -61,11 +61,10 @@ guidata(hObject, handles);
 
 global CURRENT_LEVEL;
 global NUMBER_OF_SHOTS;
+global MATRIZ;
 
-global matriz;
-matriz = [1 1 ; 2 2]
-
-set(handles.show_matriz,'String',num2str(matriz));
+% Set informations
+set(handles.show_matriz,'String',num2str(MATRIZ));
 set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
 
 % This creates the 'background' axes
@@ -80,7 +79,7 @@ imshow(lhama);
 
 
 % UIWAIT makes primeiroNivelTela wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.primeiro_nivel);
 
 
 % --- Outputs from this function are returned to the command line.

@@ -22,7 +22,7 @@ function varargout = segundoNivelTela(varargin)
 
 % Edit the above text to modify the response to help segundoNivelTela
 
-% Last Modified by GUIDE v2.5 01-Dec-2014 17:40:34
+% Last Modified by GUIDE v2.5 02-Dec-2014 23:30:32
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,6 +59,12 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 global CURRENT_LEVEL
+global NUMBER_OF_SHOTS;
+global MATRIZ;
+
+% Set informations
+set(handles.show_matriz,'String',num2str(MATRIZ));
+set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
 
 % This creates the 'background' axes
 panhandle = handles.uipanel9;
@@ -71,7 +77,7 @@ lhama = imread(current_lhama);
 imshow(lhama);
 
 % UIWAIT makes segundoNivelTela wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.segundo_nivel);
 
 
 % --- Outputs from this function are returned to the command line.
