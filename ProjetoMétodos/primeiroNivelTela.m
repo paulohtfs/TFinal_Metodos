@@ -52,11 +52,6 @@ function primeiroNivelTela_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   unrecognized PropertyName/PropertyValue pairs from the
 %            command line (see VARARGIN)
-global matriz;
-matriz = [1 1 ; 2 2]
-
-
-set(handles.show_matriz,'String',num2str(matriz));
 
 % Choose default command line output for primeiroNivelTela
 handles.output = hObject;
@@ -64,7 +59,14 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-global CURRENT_LEVEL
+global CURRENT_LEVEL;
+global NUMBER_OF_SHOTS;
+
+global matriz;
+matriz = [1 1 ; 2 2]
+
+set(handles.show_matriz,'String',num2str(matriz));
+set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
 
 % This creates the 'background' axes
 panhandle = handles.uipanel9;
@@ -120,6 +122,14 @@ function submit_Callback(hObject, eventdata, handles)
 % hObject    handle to submit (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global NUMBER_OF_SHOTS;
+if NUMBER_OF_SHOTS == 0
+    % end game logic
+else
+    % subtract or add shots
+    set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
+end
+
 
 
 

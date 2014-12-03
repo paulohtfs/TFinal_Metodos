@@ -58,8 +58,11 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-global CURRENT_LEVEL
-CURRENT_LEVEL = 1
+global CURRENT_LEVEL;
+global NUMBER_OF_SHOTS;
+
+CURRENT_LEVEL = 1;
+NUMBER_OF_SHOTS = 3;
 
 % This creates the 'background' axes
 ha = axes('units','normalized', ...
