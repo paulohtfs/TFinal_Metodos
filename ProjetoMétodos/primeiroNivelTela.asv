@@ -150,15 +150,21 @@ if( isequal(Agauss, values))
      end
 else
     %Reduces attempts
+    msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
+    NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
     if NUMBER_OF_SHOTS == 0 
         close(handles.primeiro_nivel);
-        telaLose;
-    else
-        msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
-        NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
     end
 end
-set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
+
+
+if NUMBER_OF_SHOTS == 0
+    
+    % end game logic
+else
+    % subtract or add shots
+    set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
+end
 
 
 
