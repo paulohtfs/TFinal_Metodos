@@ -318,7 +318,9 @@ function submit_screen2_Callback(hObject, eventdata, handles)
 global Agauss
 global STAGE;
 global NUMBER_OF_SHOTS;
-global Agauss_second  bgauss_second; 
+global Agauss_second  bgauss_second;
+global CURRENT_LEVEL;
+
 values = [0 0 0; 0 0 0;0 0 0];
 values(1,1) = str2num(get(handles.edit11_screen2,'string'));
 values(1,2) = str2num(get(handles.edit12_screen2,'string'));
@@ -333,12 +335,12 @@ Agauss_second
 Agauss
 STAGE
 values
+CURRENT_LEVEL
 if ( STAGE == 1)
-    if(isequal(Agauss_second, values))
+    if(isequal(num2str(Agauss_second),num2str( values)))
        % waitfor(msgBox('Acertou a primeira etapa','GaussGame'));
         set(handles.show_matriz,'String',num2str(Agauss_second));
         STAGE = STAGE +1;
-        
         
     else
           if NUMBER_OF_SHOTS == 0 
@@ -355,7 +357,9 @@ elseif( STAGE == 2)
     if( isequal(num2str(Agauss),num2str( values)))
          waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
          set(handles.show_matriz,'String',num2str(Agauss_second));
-        
+         CURRENT_LEVEL = CURRENT_LEVEL +1;
+         close(handles.segundo_nivel);
+         
          if CURRENT_LEVEL > 6
          mapaNivelDificil;
          else
@@ -363,12 +367,11 @@ elseif( STAGE == 2)
                  mapaNivelMedio
              end
          end
-     
-     
     else     
          if NUMBER_OF_SHOTS == 0 
+             
              close(handles.segundo_nivel);
-             telaLose
+             telaLose;
          else
             msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
             NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
@@ -377,6 +380,8 @@ elseif( STAGE == 2)
     end
 end
 set(handles.tentativa,'String',num2str(NUMBER_OF_SHOTS));
+set(handles.etapa,'String',num2str(STAGE));
+set(handles.fase,'String',num2str(CURRENT_LEVEL));
 
 
 
