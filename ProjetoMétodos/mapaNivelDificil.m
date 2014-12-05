@@ -95,9 +95,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
+global B_MATRIZ;
+
 
 if CURRENT_LEVEL == 7
-    MATRIZ = [1 1 1 1; 2 2 2 2; 3 3 3 3; 4 4 4 4];
+    MATRIZ = [3 2 0 1; 9 8 -3 4; -6 4 -8 0;3 -8 3 4];
+    B_MATRIZ = [3; 6; -16; 18];
     terceiroNivelTela
     close(handles.mapa_dificil);
 end
@@ -109,9 +112,10 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
-
+global B_MATRIZ;
 if CURRENT_LEVEL == 8
-    MATRIZ = [3 3 3; 4 4 4; 5 5 5];
+    MATRIZ = [-1 2 3 1 ; 2 -4 -5 1; -3 8 8 1; 1 2 -6 4];
+    B_MATRIZ = [1; 0; 2; -1];
     terceiroNivelTela
     close(handles.mapa_dificil);
 end
@@ -123,9 +127,11 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global MATRIZ;
 global CURRENT_LEVEL;
-
+global B_MATRIZ
 if CURRENT_LEVEL == 9
-    MATRIZ = [4 4 4; 5 5 5; 6 6 6];
+    
+    MATRIZ = [3 2 -1 2; 3 4 1 1; -6 2 4 -3;-3 -6 -3 -4];
+    B_MATRIZ = [1; 3; 5; 2];
     terceiroNivelTela
     close(handles.mapa_dificil);
 end

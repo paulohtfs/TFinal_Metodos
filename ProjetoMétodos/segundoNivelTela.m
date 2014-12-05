@@ -66,9 +66,9 @@ global MATRIZ;
 global B_MATRIZ;
 STAGE = 1;
 
-global  Agauss bgauss Agauss_second  bgauss_second 
-[Agauss,bgauss] = eliminacao_gauss(MATRIZ,B_MATRIZ)
-[Agauss_second,bgauss_second] = eliminacao_gauss_second(MATRIZ,B_MATRIZ)
+global  Agauss bgauss Agauss_second  bgauss_second;
+[Agauss,bgauss] = eliminacao_gauss(MATRIZ,B_MATRIZ);
+[Agauss_second,bgauss_second] = eliminacao_gauss_second(MATRIZ,B_MATRIZ);
 
 
 % Set informations
@@ -358,6 +358,7 @@ elseif( STAGE == 2)
          waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
          set(handles.show_matriz,'String',num2str(Agauss_second));
          CURRENT_LEVEL = CURRENT_LEVEL +1;
+         NUMBER_OF_SHOTS = NUMBER_OF_SHOTS + 1;
          close(handles.segundo_nivel);
          
          if CURRENT_LEVEL > 6
@@ -381,7 +382,6 @@ elseif( STAGE == 2)
 end
 set(handles.tentativa,'String',num2str(NUMBER_OF_SHOTS));
 set(handles.etapa,'String',num2str(STAGE));
-set(handles.fase,'String',num2str(CURRENT_LEVEL));
 
 
 

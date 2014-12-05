@@ -129,8 +129,8 @@ global MATRIZ;
 global CURRENT_LEVEL;
 global B_MATRIZ;
 if CURRENT_LEVEL == 6
-    MATRIZ = [3 2 4; 1 1 2; 4 3 -2];
-    B_MATRIZ = [1 ;2 ;3];
+    MATRIZ = [2 -1 1; 1 3 -2;4 3 -5];
+    B_MATRIZ = [12 ;3 ;6];
     segundoNivelTela
     close(handles.mapa_medio);
 end

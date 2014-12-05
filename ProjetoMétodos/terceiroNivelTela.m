@@ -22,7 +22,7 @@ function varargout = terceiroNivelTela(varargin)
 
 % Edit the above text to modify the response to help terceiroNivelTela
 
-% Last Modified by GUIDE v2.5 02-Dec-2014 22:57:12
+% Last Modified by GUIDE v2.5 05-Dec-2014 14:25:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -58,12 +58,28 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-
+global Agauss_second;
+global bgauss_second
+global Agauss_third;
+global Agauss;
+global bgauss;
+global bgauss_third;
 global CURRENT_LEVEL
 global NUMBER_OF_SHOTS;
 global MATRIZ;
+global STAGE;
+global B_MATRIZ;
 
+[Agauss,bgauss] = eliminacao_gauss(MATRIZ,B_MATRIZ);
+[Agauss_second,bgauss_second] = eliminacao_gauss_second(MATRIZ,B_MATRIZ);
+[Agauss_third,bgauss_third] = eliminacao_gauss_third(MATRIZ,B_MATRIZ);
+STAGE =1;
 % Set informations
+
+if(STAGE == 1)
+    set(handles.show_matriz,'String',num2str(MATRIZ));
+
+end    
 set(handles.show_matriz,'String',num2str(MATRIZ));
 set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
 % This creates the 'background' axes
@@ -93,18 +109,18 @@ varargout{1} = handles.output;
 
 
 
-function edit1_Callback(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+function edit11_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit11_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit1 as text
-%        str2double(get(hObject,'String')) returns contents of edit1 as a double
+% Hints: get(hObject,'String') returns contents of edit11_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit11_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+function edit11_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit11_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -114,189 +130,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
-
-function edit2_Callback(hObject, eventdata, handles)
-% hObject    handle to edit2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit2 as text
-%        str2double(get(hObject,'String')) returns contents of edit2 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function edit3_Callback(hObject, eventdata, handles)
-% hObject    handle to edit3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit3 as text
-%        str2double(get(hObject,'String')) returns contents of edit3 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit3_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function edit4_Callback(hObject, eventdata, handles)
-% hObject    handle to edit4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit4 as text
-%        str2double(get(hObject,'String')) returns contents of edit4 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit4_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function edit5_Callback(hObject, eventdata, handles)
-% hObject    handle to edit5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit5 as text
-%        str2double(get(hObject,'String')) returns contents of edit5 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit5_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function edit6_Callback(hObject, eventdata, handles)
-% hObject    handle to edit6 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit6 as text
-%        str2double(get(hObject,'String')) returns contents of edit6 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit6_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit6 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function edit7_Callback(hObject, eventdata, handles)
-% hObject    handle to edit7 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit7 as text
-%        str2double(get(hObject,'String')) returns contents of edit7 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit7_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit7 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function edit8_Callback(hObject, eventdata, handles)
-% hObject    handle to edit8 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit8 as text
-%        str2double(get(hObject,'String')) returns contents of edit8 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit8_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit8 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function edit9_Callback(hObject, eventdata, handles)
-% hObject    handle to edit9 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit9 as text
-%        str2double(get(hObject,'String')) returns contents of edit9 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit9_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit9 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
 
 
 % --- Executes on button press in submit.
@@ -304,21 +137,124 @@ function submit_Callback(hObject, eventdata, handles)
 % hObject    handle to submit (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global Agauss
+global STAGE;
+global NUMBER_OF_SHOTS;
+global Agauss_second  bgauss_second Agauss_third bgauss_third;
+global CURRENT_LEVEL;
+
+values = [0 0 0 0; 0 0 0 0;0 0 0 0];
+values(1,1) = str2num(get(handles.edit11_screen3,'string'));
+values(1,2) = str2num(get(handles.edit12_screen3,'string'));
+values(1,3) = str2num(get(handles.edit13_screen3,'string'));
+values(1,4) = str2num(get(handles.edit14_screen3,'string'));
+
+values(2,1) = str2num(get(handles.edit21_screen3,'string'));
+values(2,2) = str2num(get(handles.edit22_screen3,'string'));
+values(2,3) = str2num(get(handles.edit23_screen3,'string'));
+values(2,4) = str2num(get(handles.edit24_screen3,'string'));
+
+values(3,1) = str2num(get(handles.edit31_screen3,'string'));
+values(3,2) = str2num(get(handles.edit32_screen3,'string'));
+values(3,3) = str2num(get(handles.edit33_screen3,'string'));
+values(3,4) = str2num(get(handles.edit34_screen3,'string'));
+
+values(4,1) = str2num(get(handles.edit41_screen3,'string'));
+values(4,2) = str2num(get(handles.edit42_screen3,'string'));
+values(4,3) = str2num(get(handles.edit43_screen3,'string'));
+values(4,4) = str2num(get(handles.edit44_screen3,'string'));
+
+Agauss_second
+Agauss
+Agauss_third
+STAGE
+values
+CURRENT_LEVEL
+if ( STAGE == 1)
+    if(isequal(num2str(Agauss_third),num2str( values)))
+       % waitfor(msgBox('Acertou a primeira etapa','GaussGame'));
+        set(handles.show_matriz,'String',num2str(Agauss_third));
+        STAGE = STAGE +1;
+        
+    else
+          if NUMBER_OF_SHOTS == 0 
+             close(handles.terceiro_nivel);
+             telaLose
+         else
+            msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
+            NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
+          end      
+    
+    end
+elseif ( STAGE == 2)
+    if( isequal(num2str(Agauss_second),num2str( values)))
+         waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
+         set(handles.show_matriz,'String',num2str(Agauss_second));
+         CURRENT_LEVEL = CURRENT_LEVEL +1;
+         NUMBER_OF_SHOTS = NUMBER_OF_SHOTS + 1;
+         close(handles.terceiro_nivel);
+         
+         if CURRENT_LEVEL > 9
+         telaWin;
+         else
+             if CURRENT_LEVEL <= 9
+                 mapaNivelDificil
+             end
+         end
+    else     
+         if NUMBER_OF_SHOTS == 0 
+             
+             close(handles.terceiro_nivel);
+             telaLose;
+         else
+            msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
+            NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
+         end
+        
+    end
+elseif( STAGE == 3)        
+    if( isequal(num2str(Agauss),num2str( values)))
+         waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
+         set(handles.show_matriz,'String',num2str(Agauss_second));
+         CURRENT_LEVEL = CURRENT_LEVEL +1;
+         NUMBER_OF_SHOTS = NUMBER_OF_SHOTS + 1;
+         close(handles.terceiro_nivel);
+         
+         if CURRENT_LEVEL > 9
+         telaWin;
+         else
+             if CURRENT_LEVEL <= 9
+                 mapaNivelDificil
+             end
+         end
+    else     
+         if NUMBER_OF_SHOTS == 0 
+             
+             close(handles.terceiro_nivel);
+             telaLose;
+         else
+            msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
+            NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
+         end
+        
+    end
+end
+set(handles.shots,'String',num2str(NUMBER_OF_SHOTS));
+set(handles.etapa,'String',num2str(STAGE));
 
 
-
-function edit10_Callback(hObject, eventdata, handles)
-% hObject    handle to edit10 (see GCBO)
+function edit21_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit21_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit10 as text
-%        str2double(get(hObject,'String')) returns contents of edit10 as a double
+% Hints: get(hObject,'String') returns contents of edit21_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit21_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit10_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit10 (see GCBO)
+function edit21_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit21_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -330,18 +266,23 @@ end
 
 
 
-function edit11_Callback(hObject, eventdata, handles)
-% hObject    handle to edit11 (see GCBO)
+
+
+
+
+
+function edit12_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit12_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit11 as text
-%        str2double(get(hObject,'String')) returns contents of edit11 as a double
+% Hints: get(hObject,'String') returns contents of edit12_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit12_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit11_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit11 (see GCBO)
+function edit12_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit12_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -353,41 +294,18 @@ end
 
 
 
-function edit12_Callback(hObject, eventdata, handles)
-% hObject    handle to edit12 (see GCBO)
+function edit13_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit13_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit12 as text
-%        str2double(get(hObject,'String')) returns contents of edit12 as a double
+% Hints: get(hObject,'String') returns contents of edit13_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit13_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit12_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit12 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function edit13_Callback(hObject, eventdata, handles)
-% hObject    handle to edit13 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit13 as text
-%        str2double(get(hObject,'String')) returns contents of edit13 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit13_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit13 (see GCBO)
+function edit13_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit13_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -491,18 +409,18 @@ end
 
 
 
-function edit19_Callback(hObject, eventdata, handles)
-% hObject    handle to edit19 (see GCBO)
+function edit32_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit32_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit19 as text
-%        str2double(get(hObject,'String')) returns contents of edit19 as a double
+% Hints: get(hObject,'String') returns contents of edit32_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit32_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit19_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit19 (see GCBO)
+function edit32_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit32_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -514,18 +432,18 @@ end
 
 
 
-function edit20_Callback(hObject, eventdata, handles)
-% hObject    handle to edit20 (see GCBO)
+function edit23_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit23_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit20 as text
-%        str2double(get(hObject,'String')) returns contents of edit20 as a double
+% Hints: get(hObject,'String') returns contents of edit23_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit23_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit20_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit20 (see GCBO)
+function edit23_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit23_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -537,18 +455,18 @@ end
 
 
 
-function edit21_Callback(hObject, eventdata, handles)
-% hObject    handle to edit21 (see GCBO)
+function edit41_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit41_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit21 as text
-%        str2double(get(hObject,'String')) returns contents of edit21 as a double
+% Hints: get(hObject,'String') returns contents of edit41_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit41_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit21_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit21 (see GCBO)
+function edit41_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit41_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -560,18 +478,18 @@ end
 
 
 
-function edit22_Callback(hObject, eventdata, handles)
-% hObject    handle to edit22 (see GCBO)
+function edit42_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit42_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit22 as text
-%        str2double(get(hObject,'String')) returns contents of edit22 as a double
+% Hints: get(hObject,'String') returns contents of edit42_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit42_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit22_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit22 (see GCBO)
+function edit42_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit42_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -583,18 +501,18 @@ end
 
 
 
-function edit23_Callback(hObject, eventdata, handles)
-% hObject    handle to edit23 (see GCBO)
+function edit33_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit33_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit23 as text
-%        str2double(get(hObject,'String')) returns contents of edit23 as a double
+% Hints: get(hObject,'String') returns contents of edit33_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit33_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit23_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit23 (see GCBO)
+function edit33_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit33_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -606,18 +524,18 @@ end
 
 
 
-function edit24_Callback(hObject, eventdata, handles)
-% hObject    handle to edit24 (see GCBO)
+function edit31_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit31_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit24 as text
-%        str2double(get(hObject,'String')) returns contents of edit24 as a double
+% Hints: get(hObject,'String') returns contents of edit31_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit31_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit24_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit24 (see GCBO)
+function edit31_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit31_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -629,18 +547,18 @@ end
 
 
 
-function edit25_Callback(hObject, eventdata, handles)
-% hObject    handle to edit25 (see GCBO)
+function edit22_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit22_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit25 as text
-%        str2double(get(hObject,'String')) returns contents of edit25 as a double
+% Hints: get(hObject,'String') returns contents of edit22_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit22_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit25_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit25 (see GCBO)
+function edit22_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit22_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -652,18 +570,18 @@ end
 
 
 
-function edit26_Callback(hObject, eventdata, handles)
-% hObject    handle to edit26 (see GCBO)
+function edit43_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit43_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit26 as text
-%        str2double(get(hObject,'String')) returns contents of edit26 as a double
+% Hints: get(hObject,'String') returns contents of edit43_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit43_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit26_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit26 (see GCBO)
+function edit43_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit43_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -675,18 +593,18 @@ end
 
 
 
-function edit27_Callback(hObject, eventdata, handles)
-% hObject    handle to edit27 (see GCBO)
+function edit14_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit14_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit27 as text
-%        str2double(get(hObject,'String')) returns contents of edit27 as a double
+% Hints: get(hObject,'String') returns contents of edit14_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit14_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit27_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit27 (see GCBO)
+function edit14_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit14_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -698,18 +616,18 @@ end
 
 
 
-function edit28_Callback(hObject, eventdata, handles)
-% hObject    handle to edit28 (see GCBO)
+function edit24_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit24_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit28 as text
-%        str2double(get(hObject,'String')) returns contents of edit28 as a double
+% Hints: get(hObject,'String') returns contents of edit24_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit24_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit28_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit28 (see GCBO)
+function edit24_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit24_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -721,18 +639,18 @@ end
 
 
 
-function edit29_Callback(hObject, eventdata, handles)
-% hObject    handle to edit29 (see GCBO)
+function edit34_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit34_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit29 as text
-%        str2double(get(hObject,'String')) returns contents of edit29 as a double
+% Hints: get(hObject,'String') returns contents of edit34_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit34_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit29_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit29 (see GCBO)
+function edit34_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit34_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -744,18 +662,18 @@ end
 
 
 
-function edit30_Callback(hObject, eventdata, handles)
-% hObject    handle to edit30 (see GCBO)
+function edit44_screen3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit44_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit30 as text
-%        str2double(get(hObject,'String')) returns contents of edit30 as a double
+% Hints: get(hObject,'String') returns contents of edit44_screen3 as text
+%        str2double(get(hObject,'String')) returns contents of edit44_screen3 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit30_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit30 (see GCBO)
+function edit44_screen3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit44_screen3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

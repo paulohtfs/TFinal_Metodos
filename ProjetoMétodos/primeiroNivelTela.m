@@ -136,10 +136,10 @@ values(2,2) = str2num(get(handles.edit22,'string'));
 
 if( isequal(Agauss, values))
      waitfor(msgbox('Parabéns!! Você acertou!!','GaussGame'));
-     %close(primeiro_nivel_tela);
      CURRENT_LEVEL = CURRENT_LEVEL + 1;
      CURRENT_LHAMA = CURRENT_LHAMA + 1;
      NUMBER_OF_SHOTS = NUMBER_OF_SHOTS + 1;
+     
      if CURRENT_LEVEL > 3
          mapaNivelMedio;
      else
@@ -147,11 +147,12 @@ if( isequal(Agauss, values))
              mapaNivelFacil
          end
      end
+     close(handles.primeiro_nivel);
 else
     %Reduces attempts
     if NUMBER_OF_SHOTS == 0 
         close(handles.primeiro_nivel);
-        telaLose
+        telaLose;
     else
         msgbox('Ops!! Você errou!!Tente novamente','GaussGame');
         NUMBER_OF_SHOTS = NUMBER_OF_SHOTS -1;
